@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>SmartPrint Admin Dashboard</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link 
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" 
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/advanced.css">
+</head>
+
+<body class="admin-body">
+
+  <main class="admin-shell">
+
+    <!-- Topbar -->
+    <header class="admin-topbar glass-card">
+      <a href="index.html" class="admin-brand">
+        <span class="logo-mark">SP</span>
+        <span>SmartPrint Admin</span>
+      </a>
+
+      <div class="admin-actions">
+        <a href="index.html" class="small-action-btn">View Site</a>
+        <button class="small-action-btn" id="logoutBtn" type="button">Logout</button>
+
+        <button class="pf-theme-toggle" id="themeToggle" type="button">
+          <span class="theme-icon">🌙</span>
+        </button>
+      </div>
+    </header>
+
+    <section class="admin-layout">
+
+      <!-- Analytics Cards -->
+      <div class="analytics-grid">
+
+        <article class="analytics-card glass-card">
+          <span>Total Orders</span>
+          <strong id="totalOrders">0</strong>
+        </article>
+
+        <article class="analytics-card glass-card">
+          <span>Total Units</span>
+          <strong id="totalUnits">0</strong>
+        </article>
+
+        <article class="analytics-card glass-card">
+          <span>Estimated Revenue</span>
+          <strong id="estimatedRevenue">$0</strong>
+        </article>
+
+        <article class="analytics-card glass-card">
+          <span>Average Quantity</span>
+          <strong id="averageQuantity">0</strong>
+        </article>
+
+      </div>
+
+      <!-- Chart -->
+      <section class="dashboard-panel glass-card">
+        <div class="dashboard-panel-header">
+          <div>
+            <h2>Orders by Product Type</h2>
+            <p class="muted-text">Visual breakdown of customer demand.</p>
+          </div>
+
+          <button class="small-action-btn" id="refreshDashboardBtn">
+            Refresh
+          </button>
+        </div>
+
+        <div class="chart-wrap">
+          <canvas id="ordersChart"></canvas>
+        </div>
+      </section>
+
+      <!-- Orders Table -->
+      <section class="dashboard-panel glass-card">
+        <div class="dashboard-panel-header">
+          <div>
+            <h2>Order Management</h2>
+            <p class="muted-text">Search, filter, paginate, and inspect order requests.</p>
+          </div>
+
+          <div class="dashboard-tools">
+            <input 
+              type="search" 
+              id="orderSearch" 
+              placeholder="Search name, phone, design..."
+            >
+
+            <select id="designFilter">
+              <option value="all">All Designs</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="orders-table">
+            <thead>
+              <tr>
+                <th>Customer</th>
+                <th>Phone</th>
+                <th>Design</th>
+                <th>Quantity</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+
+            <tbody id="ordersTableBody">
+              <tr>
+                <td colspan="7">
+                  <div class="skeleton-line"></div>
+                  <div class="skeleton-line short"></div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pagination" id="pagination"></div>
+      </section>
+
+    </section>
+
+  </main>
+
+  <!-- Toast Root -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Modal Root -->
+  <div class="pf-modal" id="pfModal" aria-hidden="true">
+    <div class="pf-modal-backdrop" data-close-modal></div>
+
+    <div class="pf-modal-panel">
+      <button class="pf-modal-close" type="button" data-close-modal>×</button>
+      <div id="pfModalContent"></div>
+    </div>
+  </div>
+
+  <script>
+    window.PRINTFORGE_API_BASE = "http://127.0.0.1:5000/api";
+  </script>
+
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+  <script src="js/admin.js"></script>
+
+</body>
+</html>

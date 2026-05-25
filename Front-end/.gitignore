@@ -1,0 +1,17 @@
+node_modules/
+.env
+.env.*
+dist/
+build/
+coverage/
+.cache/
+npm-debug.log
+
+.vercel/
+.next/
+
+logs/
+*.log
+
+redis-data/
+uploads/
